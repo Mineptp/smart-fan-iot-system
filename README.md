@@ -1,6 +1,6 @@
 # 🌀 Smart Fan IoT System
 
-A multi-tier IoT solution for smart fan control and real-time environmental telemetry monitoring (temperature & humidity) using ESP32, Eclipse Mosquitto MQTT Broker, Node.js backend worker, Supabase DB, and React dashboard.
+A multi-tier IoT solution for smart fan control and real-time environmental telemetry monitoring (temperature & humidity) using ESP32 FreeRTOS firmware, Eclipse Mosquitto MQTT Broker, Node.js backend worker, Supabase DB, and React dashboard.
 
 ---
 
@@ -9,7 +9,7 @@ A multi-tier IoT solution for smart fan control and real-time environmental tele
 ```
 smart-fan-iot-system/
 ├── backend/       # Node.js Worker (Mosquitto MQTT Subscriber & Supabase DB ingestion)
-├── firmware/      # ESP32 C++ Firmware (PlatformIO + Arduino framework)
+├── firmware/      # ESP32 C++ Firmware (FreeRTOS Multi-threading + Watchdog WDT + PlatformIO)
 ├── frontend/      # React Web Dashboard (Supabase Realtime & Remote PWM Control)
 └── README.md      # Main documentation
 ```
@@ -18,7 +18,7 @@ smart-fan-iot-system/
 
 | Tier | Path | Description |
 | :--- | :--- | :--- |
-| **Firmware** | [`/firmware`](./firmware) | ESP32 C++ code reading AHTX0 sensor, driving LCD display, adjusting fan PWM speed, and publishing/subscribing to Eclipse Mosquitto MQTT broker. |
+| **Firmware** | [`/firmware`](./firmware) | ESP32 C++ multi-threaded firmware (FreeRTOS) reading AHTX0 sensor, driving LCD display, adjusting fan PWM speed, and publishing/subscribing to Mosquitto MQTT broker with Watchdog (WDT) safety monitoring. |
 | **Backend** | [`/backend`](./backend) | Node.js service listening to Mosquitto MQTT telemetry topics, saving data into Supabase `fan_telemetry` table, and relaying downlink commands. |
 | **Frontend** | [`/frontend`](./frontend) | React dashboard for live telemetry monitoring via Supabase Realtime and remote fan PWM speed control. |
 

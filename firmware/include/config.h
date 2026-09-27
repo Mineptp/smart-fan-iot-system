@@ -30,4 +30,10 @@
 #define DEFAULT_TEMP_SAFE_RESTORE        40.0f  // Safe restore -> AUTO state (°C)
 #define OPERATOR_TIMEOUT_MS              10000  // Timeout after manual knob action (10s) -> AUTO
 
+// FreeRTOS & Watchdog (WDT) Configurations
+#define WDT_TIMEOUT_SECONDS 5                   // Hardware Watchdog Timeout (seconds)
+#define STACK_SIZE_SENSOR_TASK 4096             // Stack size for Sensor & LCD Task (bytes)
+#define STACK_SIZE_NETWORK_TASK 8192            // Stack size for Wi-Fi & MQTT Task (bytes)
+#define STACK_SIZE_CONTROL_TASK 4096            // Stack size for Fan PWM & Encoder Task (bytes)
+
 #endif // CONFIG_H
